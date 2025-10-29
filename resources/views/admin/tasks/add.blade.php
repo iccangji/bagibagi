@@ -41,6 +41,22 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>@lang('Lottery')</label>
+                                    <select name="lottery_id" class="form-select" required>
+                                        <option value="" disabled selected>@lang('Select Lottery')</option>
+                                        @foreach ($lotteries as $lottery)
+                                            <option value="{{ $lottery->id }}"
+                                                {{ old('lottery_id', @$task->lottery_id) == $lottery->id ? 'selected' : '' }}>
+                                                {{ $lottery->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn--primary h-45 w-100 mt-3" type="submit">@lang('Submit')</button>
                     </div>
                 </div>

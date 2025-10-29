@@ -55,8 +55,6 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="nav-item {{ menuActive('tasks') }}"><a class="nav-link"
-                            href="{{ route('tasks') }}">@lang('Tasks')</a></li>
                     <li class="nav-item {{ menuActive('winners') }}"><a class="nav-link"
                             href="{{ route('winners') }}">@lang('Winners')</a></li>
                     <li class="nav-item {{ menuActive('blog') }}"><a class="nav-link"

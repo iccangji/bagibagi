@@ -8,7 +8,8 @@
                     <div class="competition-details__wrapper">
                         @foreach (@$lottery->slider_images as $item)
                             <div class="competition-details__item">
-                                <img src="{{ getImage(getFilePath('raffle') . '/' . $item, getFileSize('raffle')) }}" alt="" />
+                                <img src="{{ getImage(getFilePath('raffle') . '/' . $item, getFileSize('raffle')) }}"
+                                    alt="" />
                             </div>
                         @endforeach
                     </div>
@@ -16,7 +17,8 @@
                         @foreach (@$lottery->slider_images as $item)
                             <div>
                                 <div class="competition-gallery__item">
-                                    <img src="{{ getImage(getFilePath('raffle') . '/thumb_' . $item, getFileSize('raffle')) }}" alt="" />
+                                    <img src="{{ getImage(getFilePath('raffle') . '/thumb_' . $item, getFileSize('raffle')) }}"
+                                        alt="" />
                                 </div>
                             </div>
                         @endforeach
@@ -30,50 +32,51 @@
                         <h3 class="competition-details__right-title text--base">
                             {{ showAmount($lottery->price) }}
                         </h3>
-
-                        <a href="#buysection" class="cmn--btn">@lang('Buy Tickets')</a>
-                        <h5 class="tickets-wrapper__title">@lang('Enter Your Tickets')</h5>
-                        <div class="competition-details__quantity d-flex">
-                            <form action="#">
-                                <p class="qty">
-                                    <button class="qtyminus" aria-hidden="true">&minus;</button>
-                                    <input type="number" name="qty" id="qty" min="1" step="1" value="1" />
-                                    <button class="qtyplus" aria-hidden="true">&plus;</button>
-                                </p>
-                            </form>
-                            <div class="competition-details__button {{ $percentage == 100 ? 'd-none' : '' }}">
-                                <button type="submit" class="btn cmn--btn lottery-book-any">
-                                    @lang('Lucky Dip')
-                                </button>
-                            </div>
+                        <div>
+                            <h4 class="title mb-2"> @lang('Tasks') </h4>
+                            @forelse ($tasks as $task)
+                                <div class="d-flex justify-content-between align-items-center p-2 rounded">
+                                    <span> {{ $task->title }} ({{ $task->reward_points }} Points)</span>
+                                    <a href="{{ route('user.tasks.show', $task->id) }}">
+                                        <span class="btn cmn--btn">@lang('View Task')</span>
+                                    </a>
+                                </div>
+                            @empty
+                                <div class="text-muted text-center">@lang('No tasks')</div>
+                            @endforelse
                         </div>
+                        <a href="#buysection" class="cmn--btn mt-4">@lang('Join')</a>
 
-                        <div class="remaining-time">
+                        <div class="mt-2 remaining-time">
                             <span class="title"> @lang('Live Drawn:') </span>
                             <div class="countdown-item countdown" data-Date="{{ @$lottery->draw_date, 'd-m-Y H:i:s ' }}">
                                 <div class="remaining-time">
                                     <div class="remaining-time running">
                                         <ul class="remaining-time__content d-flex countdown__menu">
-                                            <li class="box countdown__list"><span class="days"></span> <span class="box__text"> @lang('Days') </span> </li>
-                                            <li class="box"><span class="hours"></span> <span class="box__text">@lang('Hours') </span> </li>
-                                            <li class="box"><span class="minutes"></span> <span class="box__text">@lang('Minutes') </span></li>
-                                            <li class="box"><span class="seconds"></span><span class="box__text">@lang('second') </span></li>
+                                            <li class="box countdown__list"><span class="days"></span> <span
+                                                    class="box__text"> @lang('Days') </span> </li>
+                                            <li class="box"><span class="hours"></span> <span
+                                                    class="box__text">@lang('Hours') </span> </li>
+                                            <li class="box"><span class="minutes"></span> <span
+                                                    class="box__text">@lang('Minutes') </span></li>
+                                            <li class="box"><span class="seconds"></span><span
+                                                    class="box__text">@lang('second') </span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                         <div class="competition-details__progressbar">
                             <div class="progressbar-count">
-                                <span class="count-start"> {{ $lottery->num_of_tickets - $lottery->num_of_available_tickets }} </span>
+                                <span class="count-start">
+                                    {{ $lottery->num_of_tickets - $lottery->num_of_available_tickets }} </span>
                                 <span class="count-notice"> @lang('Total Sold') </span>
                                 <span class="count-end"> {{ $lottery->num_of_tickets }} </span>
                             </div>
                             <div class="progress custom--progress">
-                                <div class="progress-bar bg--base" role="progressbar" aria-label="Success example" style="width: {{ $percentage }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg--base" role="progressbar" aria-label="Success example"
+                                    style="width: {{ $percentage }}%" aria-valuenow="25" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
                             </div>
                             <p class="remaining-count">{{ $lottery->num_of_available_tickets }} @lang('Tickets remaining')</p>
                         </div>
@@ -85,25 +88,31 @@
                     <div class="competition-details__tab">
                         <ul class="nav nav-pills custom--tab tab-two" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-history-tab" data-bs-toggle="pill" data-bs-target="#pills-history" type="button" role="tab" aria-controls="pills-history" aria-selected="false">
+                                <button class="nav-link active" id="pills-history-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-history" type="button" role="tab"
+                                    aria-controls="pills-history" aria-selected="false">
                                     @lang('Products')
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="pills-descrip-tab" data-bs-toggle="pill" data-bs-target="#pills-descrip" type="button" role="tab" aria-controls="pills-descrip" aria-selected="true">
+                                <button class="nav-link " id="pills-descrip-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-descrip" type="button" role="tab"
+                                    aria-controls="pills-descrip" aria-selected="true">
                                     @lang('Description')
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="pills-descrip-tab" data-bs-toggle="pill" data-bs-target="#pills-price-giving" type="button" role="tab" aria-controls="pills-descrip"
-                                        aria-selected="true">
+                                <button class="nav-link " id="pills-descrip-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-price-giving" type="button" role="tab"
+                                    aria-controls="pills-descrip" aria-selected="true">
                                     @lang('Price Giving')
                                 </button>
                             </li>
 
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab" tabindex="0">
+                            <div class="tab-pane fade show active" id="pills-history" role="tabpanel"
+                                aria-labelledby="pills-history-tab" tabindex="0">
                                 <div class="tickets-wrapper">
                                     <div id="cart">
                                         <button type="submit" class="d-block ms-auto">
@@ -111,7 +120,8 @@
                                         </button>
                                     </div>
 
-                                    <div class="competition-details__dip {{ empty($newInstChooseTickets) ? 'd-none' : '' }}">
+                                    <div
+                                        class="competition-details__dip {{ empty($newInstChooseTickets) ? 'd-none' : '' }}">
                                         <p class="title">@lang('Choose an Instant Lucky Dip:')</p>
                                         <div class="dip-wrapper">
                                             @foreach ($newInstChooseTickets as $item)
@@ -131,13 +141,16 @@
 
                                         <div class="competition-details__ticket-range">
                                             @foreach ($ticketsDataSets as $key => $item)
-                                                <button class="ticket-btn {{ $key == 0 ? 'ticket-btn-active' : '' }}" data-segment="{{ $key }}">{{ $item['startfrom'] }} - {{ $item['endat'] }}</button>
+                                                <button class="ticket-btn {{ $key == 0 ? 'ticket-btn-active' : '' }}"
+                                                    data-segment="{{ $key }}">{{ $item['startfrom'] }} -
+                                                    {{ $item['endat'] }}</button>
                                             @endforeach
                                         </div>
                                     </div>
                                     <div class="ticket-number-wrapper">
                                         @foreach ($ticketsDataSets as $key => $segment)
-                                            <ul class="ticket-number-list ticket-number-list-choose mb-3 {{ $key == 0 ? '' : 'd-none' }}" id="segment-{{ $key }}">
+                                            <ul class="ticket-number-list ticket-number-list-choose mb-3 {{ $key == 0 ? '' : 'd-none' }}"
+                                                id="segment-{{ $key }}">
                                                 @foreach ($segment['values'] as $ticket)
                                                     @php
                                                         $ticketArray = [intval($ticket)];
@@ -146,7 +159,8 @@
                                                         $isSelected = checkCartLottery($cartTickets, $ticketArray);
                                                         $class = $isSelected ? 'selected' : $isAvailable;
                                                     @endphp
-                                                    <li class="ticket-number-item  {{ $class }}">{{ $ticket }} </li>
+                                                    <li class="ticket-number-item  {{ $class }}">
+                                                        {{ $ticket }} </li>
                                                 @endforeach
                                             </ul>
                                         @endforeach
@@ -154,7 +168,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade " id="pills-descrip" role="tabpanel" aria-labelledby="pills-descrip-tab" tabindex="0">
+                            <div class="tab-pane fade " id="pills-descrip" role="tabpanel"
+                                aria-labelledby="pills-descrip-tab" tabindex="0">
                                 <div class="description-list">
                                     @php
                                         echo $lottery->description;
@@ -162,7 +177,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade " id="pills-price-giving" role="tabpanel" aria-labelledby="pills-price-giving-tab" tabindex="0">
+                            <div class="tab-pane fade " id="pills-price-giving" role="tabpanel"
+                                aria-labelledby="pills-price-giving-tab" tabindex="0">
                                 <div class="description-list">
                                     @php
                                         echo $lottery->price_giving;
@@ -177,7 +193,8 @@
         </div>
     </div>
 
-    <div class="modal fade custom--modal fade-in-scale" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal fade custom--modal fade-in-scale" id="ticketModal" tabindex="-1"
+        aria-labelledby="ticketModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -224,7 +241,6 @@
 @endpush
 
 @push('script-lib')
-
     <script src="{{ asset($activeTemplateTrue . 'js/multi-countdown.js') }}"></script>
 @endpush
 
@@ -310,7 +326,8 @@
                 const ticketNumber = $(this).text().trim();
                 const quantity = 1;
                 const id = Number(`{{ $lottery->id }}`);
-                const url = "{{ route('lottery.book.single', ':ticketNumber') }}".replace(':ticketNumber', ticketNumber);
+                const url = "{{ route('lottery.book.single', ':ticketNumber') }}".replace(':ticketNumber',
+                    ticketNumber);
 
                 bookLotteryTickets(quantity, id, url)
                     .then(response => {
@@ -368,7 +385,8 @@
                 if (!singleTicket) {
                     $('.ticket-number-list-modal').empty();
                     $.each(response.data.randAvailableTickets, function(index, value) {
-                        $('.ticket-number-list-modal').append(`<li class="ticket-number-item">${value}</li>`);
+                        $('.ticket-number-list-modal').append(
+                            `<li class="ticket-number-item">${value}</li>`);
                     });
                     $('#ticketModal').modal('show');
                 }

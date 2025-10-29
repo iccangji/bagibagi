@@ -14,7 +14,6 @@ use App\Models\PickedTicket;
 use App\Models\SupportMessage;
 use App\Models\SupportTicket;
 use App\Models\Task;
-use App\Models\UserTask;
 use App\Models\Winner;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -238,7 +237,9 @@ class SiteController extends Controller
             ];
         });
 
-        return view('Template::lottery_detail', compact('lottery', 'pageTitle', 'percentage', 'newInstChooseTickets', 'ticketsDataSets', 'cartTickets'));
+        $tasks = Task::where('lottery_id', $lottery->id)->get();
+
+        return view('Template::lottery_detail', compact('lottery', 'pageTitle', 'percentage', 'newInstChooseTickets', 'ticketsDataSets', 'cartTickets', 'tasks'));
     }
 
     public function lotteryBookAny(Request $request)
@@ -399,56 +400,5 @@ class SiteController extends Controller
         $seoContents = $page->seo_content;
         $seoImage    = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
         return view('Template::winners', compact('pageTitle', 'winners', 'sections', 'seoContents', 'seoImage'));
-    }
-
-    public function tasks()
-    {
-        $pageTitle   = 'Tasks';
-        // $winners     = Task::paginate(getPaginate(18));
-        $tasks     = Task::paginate(getPaginate(10));
-        $page        = Page::where('tempname', activeTemplate())->where('slug', 'tasks')->first();
-        $sections    = $page->secs;
-        $seoContents = $page->seo_content;
-        $seoImage    = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
-        return view('Template::tasks', compact('pageTitle', 'tasks', 'sections', 'seoContents', 'seoImage'));
-    }
-
-    public function showTask(Task $task)
-    {
-        $pageTitle   = 'Task';
-        $page        = Page::where('tempname', activeTemplate())->where('slug', 'tasks')->first();
-        $submitted  = UserTask::where('user_id', auth()->id())
-            ->where('task_id', $task->id)
-            ->first();
-        $sections    = $page->secs;
-        $seoContents = $page->seo_content;
-        $seoImage    = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
-        return view('Template::task_show', compact('pageTitle', 'task', 'sections', 'seoContents', 'seoImage', 'submitted'));
-    }
-
-    public function submitTask(Request $request, Task $task)
-    {
-        $request->validate([
-            'proof' => 'required|file|mimes:jpg,png|max:4096',
-        ]);
-
-        if ($request->hasFile('proof')) {
-            try {
-                $path = fileUploader($request->file('proof'), getFilePath('taskProof'));
-            } catch (\Exception $exp) {
-                dd($exp);
-                $notify[] = ['error', 'Couldn\'t upload your image'];
-                return back()->withNotify($notify);
-            }
-        }
-        // $path = $request->file('proof')->store('proofs', 'public');
-
-        $request->user()->tasks()->attach($task->id, [
-            'status' => 'pending',
-            'proof' => $path,
-        ]);
-
-        $notify[] = ['success', 'Task has been sent for verification'];
-        return redirect()->route('tasks')->withNotify($notify);
     }
 }

@@ -86,5 +86,11 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::post('manual', 'manualDepositUpdate')->name('manual.update');
             Route::post('midtrans/update', 'midtransDepositUpdate')->name('midtrans.update');
         });
+        Route::prefix('tasks')->name('tasks')->controller('User\TaskController')->group(function () {
+            Route::get('/', 'tasks')->name('.index');
+            Route::get('/submitted', 'submittedTasks')->name('.submitted');
+            Route::get('/{task}', 'showTask')->name('.show');
+            Route::post('/{task}/submit', 'submitTask')->name('.submit');
+        });
     });
 });

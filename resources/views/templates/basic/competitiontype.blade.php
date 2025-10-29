@@ -38,8 +38,7 @@
 
                                 <div class="competittion-item__btn">
                                     <a href="{{ route('lottery.details', [@$item->id, @$item->slug]) }}"
-                                        class="cmn--btn w-100">@lang('Buy Tickets')
-                                        ({{ showAmount(@$item->price, exceptZeros: true) }})</a>
+                                        class="cmn--btn w-100">@lang('Join Now')</a>
                                 </div>
                             </div>
                         </div>

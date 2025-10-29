@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lottery;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class TaskController extends Controller
     public function create()
     {
         $pageTitle = 'Insert Tasks';
-        return view('admin.tasks.add', compact('pageTitle'));
+        $lotteries = Lottery::latest()->get();
+        return view('admin.tasks.add', compact('pageTitle', 'lotteries'));
     }
 
     public function store(Request $request)
@@ -27,6 +29,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'reward_points' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'lottery_id' => 'required|exists:lotteries,id',
         ]);
 
         Task::create($request->all());
@@ -37,7 +40,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $pageTitle = 'Update Tasks';
-        return view('admin.tasks.add', compact('task', 'pageTitle'));
+        $lotteries = Lottery::latest()->get();
+        return view('admin.tasks.add', compact('task', 'pageTitle', 'lotteries'));
     }
 
     public function update(Request $request, Task $task)

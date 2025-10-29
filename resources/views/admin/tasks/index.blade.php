@@ -11,6 +11,7 @@
                                     <th>@lang('Title')</th>
                                     <th>@lang('Reward')</th>
                                     <th>@lang('Created')</th>
+                                    <th>@lang('Lottery')</th>
                                     <th>@lang('Action')</th>
                                 </tr>
                             </thead>
@@ -20,6 +21,7 @@
                                         <td>{{ $task->title }}</td>
                                         <td>{{ $task->reward_points }} pts</td>
                                         <td>{{ $task->created_at->diffForHumans() }}</td>
+                                        <td>{{ $task->lottery->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.tasks.edit', $task) }}"
                                                 class="btn btn-sm btn-outline--primary editBtn cuModalBtn">Edit</a>

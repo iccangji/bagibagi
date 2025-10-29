@@ -12,8 +12,6 @@ class UserTask extends Model
     protected $fillable = [
         'user_id',
         'task_id',
-        'completed',
-        'completed_at',
     ];
 
     public function user()

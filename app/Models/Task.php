@@ -13,6 +13,7 @@ class Task extends Model
         'title',
         'description',
         'reward_points',
+        'lottery_id',
     ];
 
     public function users()
@@ -20,5 +21,10 @@ class Task extends Model
         return $this->belongsToMany(User::class, 'user_tasks')
             ->withPivot(['status', 'proof', 'verified_at'])
             ->withTimestamps();
+    }
+
+    public function lottery()
+    {
+        return $this->belongsTo(Lottery::class);
     }
 }

@@ -22,9 +22,6 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
 Route::controller('SiteController')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/contact', 'contactSubmit');
-    Route::get('tasks', 'tasks')->middleware('auth')->name('tasks');
-    Route::get('tasks/{task}', 'showTask')->middleware('auth')->name('tasks.show');
-    Route::post('tasks/{task}/submit', 'submitTask')->middleware('auth')->name('tasks.submit');
 
     Route::get('winners', 'winners')->name('winners');
 

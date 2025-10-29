@@ -45,7 +45,22 @@
                                 </div>
                             </div>
                         @endforeach
-
+                        @if ($errors->any())
+                            <div>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        @if (in_array('Insufficient balance.', $errors->all()))
+                                            <p class="">
+                                                @lang('Please complete the tasks or ')
+                                                <a href="{{ route('user.deposit.index') }}" class="text--base">
+                                                    @lang('Buy more tickets')
+                                                </a>
+                                            </p>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-xl-4">
                         <div class="order-summery">
@@ -55,7 +70,7 @@
                                 <span class="order-summery__number-two">{{ showAmount($totalPrice) }}</span>
                             </div>
                             <div class="order-summery__one d-flex justify-content-between">
-                                <h6 class="order-summery__title-two">@lang('Your balance :')</h6>
+                                <h6 class="order-summery__title-two">@lang('Your points :')</h6>
                                 <span class="order-summery__number-two">{{ showAmount($balance) }}</span>
                             </div>
                             <div class="checkout">

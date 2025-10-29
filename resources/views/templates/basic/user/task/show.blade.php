@@ -1,12 +1,12 @@
-@extends($activeTemplate . 'layouts.frontend')
+@extends($activeTemplate . 'layouts.master')
 @section('content')
-    <section class="py-120">
+    <section>
         <div class="container">
-            <h2>{{ $task->title }}</h2>
-            <p>{{ $task->description }}</p>
-            <p><strong>@lang('Hadiah Poin:')</strong> {{ $task->reward_points }}</p>
+            <h3>{{ $task->title }}</h3>
+            <p><strong>@lang('Points:')</strong> {{ $task->reward_points }}</p>
+            <p class="my-3">{{ $task->description }}</p>
             @if (!$submitted)
-                <form action="{{ route('tasks.submit', $task) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.tasks.submit', $task) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label>@lang('Proof of work (screenshot/foto/pdf)')</label>
@@ -18,7 +18,7 @@
             @else
                 {{-- Sudah mengerjakan --}}
                 <div class="mt-4">
-                    <h5>Status Pengerjaan</h5>
+                    <h5>@lang('Task Status')</h5>
                     @if ($submitted->status === 'pending')
                         <span class="badge bg-warning text-dark">@lang('Waiting for verification')</span>
                     @elseif($submitted->status === 'verified')

@@ -21,6 +21,29 @@
                 </a>
             </li>
 
+            <li class="sidebar-menu-list__item has-dropdown {{ menuActive(['user.tasks.*']) }}">
+                <a href="javascript:void(0)" class="sidebar-menu-list__link {{ menuActive(['ticket.*']) }}">
+                    <span class="icon"><i class="las la-tasks"></i></span>
+                    <span class="text"> @lang('Tasks') </span>
+                </a>
+                <div class="sidebar-submenu">
+                    <ul class="sidebar-submenu-list">
+                        <li class="sidebar-submenu-list__item">
+                            <a href="{{ route('user.tasks.index') }}"
+                                class="sidebar-submenu-list__link {{ menuActive(['user.tasks.index', 'user.tasks.show']) }}">
+                                <span class="text"> @lang('Tasks') </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-submenu-list__item">
+                            <a href="{{ route('user.tasks.submitted') }}"
+                                class="sidebar-submenu-list__link {{ menuActive(['user.tasks.submitted']) }}">
+                                <span class="text"> @lang('Submitted Tasks') </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li class="sidebar-menu-list__item">
                 <a href="{{ route('user.deposit.index') }}"
                     class="sidebar-menu-list__link {{ menuActive('user.deposit.index') }}">

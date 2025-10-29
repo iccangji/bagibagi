@@ -7,7 +7,8 @@ use App\Traits\GlobalStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
-class Lottery extends Model {
+class Lottery extends Model
+{
     use GlobalStatus;
 
     protected $casts = [
@@ -15,23 +16,28 @@ class Lottery extends Model {
         'winning_tickets' => 'array',
     ];
 
-    public function competitions() {
+    public function competitions()
+    {
         return $this->belongsTo(Competition::class, 'competition_id', 'id');
     }
 
-    public function winners() {
+    public function winners()
+    {
         return $this->hasMany(Winner::class, 'lottery_id', 'id');
     }
 
-    public function pickedTickets() {
+    public function pickedTickets()
+    {
         return $this->hasMany(PickedTicket::class, 'lottery_id', 'id');
     }
 
-    public function users() {
+    public function users()
+    {
         return $this->hasManyThrough(User::class, Winner::class, 'lottery_id', 'id', 'id', 'user_id');
     }
 
-    public function scopePickedAndWonByUser($query, $userId) {
+    public function scopePickedAndWonByUser($query, $userId)
+    {
         return $query
             ->with(['pickedTickets' => function ($query) use ($userId) {
                 $query->where('user_id', $userId);
@@ -43,11 +49,13 @@ class Lottery extends Model {
             });
     }
 
-    public function getTotalSoldAttribute() {
+    public function getTotalSoldAttribute()
+    {
         return count(json_decode($this->sold_tickets));
     }
 
-    public function getWinStatusAttribute() {
+    public function getWinStatusAttribute()
+    {
         if ($this->winners->isNotEmpty()) {
             return ' <span class="badge badge--success"> ' . trans('Win') . '</span>';
         } else if ($this->draw_date > now()) {
@@ -57,7 +65,8 @@ class Lottery extends Model {
         }
     }
 
-    public function statusBadge(): Attribute {
+    public function statusBadge(): Attribute
+    {
         return new Attribute(function () {
             $html = '';
             if ($this->status == Status::ENABLE) {
@@ -68,7 +77,8 @@ class Lottery extends Model {
             return $html;
         });
     }
-    public function drawnBadge(): Attribute {
+    public function drawnBadge(): Attribute
+    {
         return new Attribute(function () {
             $html = '';
             if ($this->is_drawn == Status::LOTTERY_DRAWN) {
@@ -80,10 +90,17 @@ class Lottery extends Model {
         });
     }
 
-    public function scopeLive($query) {
+    public function scopeLive($query)
+    {
         return $query->whereDate('draw_date', '>=', now())->where('is_drawn', Status::LOTTERY_LIVE);
     }
-    public function scopeDrawn($query) {
+    public function scopeDrawn($query)
+    {
         return $query->where('is_drawn', Status::LOTTERY_DRAWN);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }
