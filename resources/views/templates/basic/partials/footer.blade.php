@@ -70,6 +70,9 @@
                 <p class="bottom-footer-text text-center">
                     @lang('Copyright') &copy; @php echo date('Y') @endphp <a href="{{ route('home') }}" class="text--base">{{ __(gs('site_name')) }}</a> @lang('All Rights Reserved')
                 </p>
+                <p class="bottom-footer-text text-center mt-2">
+                    Undian ini bukan judi ─ Sudah sesuai dengan hukum Islam. <br> <a href="{{ route('blog.details', 'hukum-pemberian-hadiah-gratis')}}">Klik di sini untuk informasi</a>
+                </p>
             </div>
         </div>
     </footer>

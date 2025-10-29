@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         // Create a new page
-        $password = 'admin123';
+        $password = env('ADMIN_PASSWORD');
         DB::table('admins')
             ->where('id', 1)
             ->update([
