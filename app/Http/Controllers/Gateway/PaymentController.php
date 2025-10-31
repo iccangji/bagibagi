@@ -296,16 +296,17 @@ class PaymentController extends Controller
         $track = session()->get('Track');
         $data  = Deposit::with('gateway')->where('status', Status::PAYMENT_INITIATE)->where('trx', $track)->first();
         abort_if(!$data, 404);
-        $gatewayCurrency = $data->gatewayCurrency();
-        $gateway         = $gatewayCurrency->method;
-        $formData        = $gateway->form->form_data;
 
-        $formProcessor  = new FormProcessor();
-        $validationRule = $formProcessor->valueValidation($formData);
-        $request->validate($validationRule);
-        $userData = $formProcessor->processFormData($request, $formData);
+        // $gatewayCurrency = $data->gatewayCurrency();
+        // $gateway         = $gatewayCurrency->method;
+        // $formData        = $gateway->form->form_data;
 
-        $data->detail = $userData;
+        // $formProcessor  = new FormProcessor();
+        // $validationRule = $formProcessor->valueValidation($formData);
+        // $request->validate($validationRule);
+        // $userData = $formProcessor->processFormData($request, $formData);
+
+        // $data->detail = $userData;
         $data->status = Status::PAYMENT_PENDING;
         $data->save();
 

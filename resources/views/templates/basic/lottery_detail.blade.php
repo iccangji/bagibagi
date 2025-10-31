@@ -48,7 +48,7 @@
                         <a href="#buysection" class="cmn--btn mt-4">@lang('Join')</a>
 
                         <div class="mt-2 remaining-time">
-                            <span class="title"> @lang('Undian Berlangsung') </span>
+                            <span class="title"> @lang('Undian sedang Berlangsung') </span>
                             <div class="countdown-item countdown" data-Date="{{ @$lottery->draw_date, 'd-m-Y H:i:s ' }}">
                                 <div class="remaining-time">
                                     <div class="remaining-time running">
@@ -122,7 +122,7 @@
 
                                     <div
                                         class="competition-details__dip {{ empty($newInstChooseTickets) ? 'd-none' : '' }}">
-                                        <p class="title">@lang('Choose an Instant Lucky Dip:')</p>
+                                        <p class="title">@lang('Pilih sekaligus:')</p>
                                         <div class="dip-wrapper">
                                             @foreach ($newInstChooseTickets as $item)
                                                 <button class="btn-item segment-ticket active">
