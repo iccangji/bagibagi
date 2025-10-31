@@ -53,7 +53,7 @@
                                             <p class="">
                                                 @lang('Please complete the tasks or ')
                                                 <a href="{{ route('user.deposit.index') }}" class="text--base">
-                                                    @lang('Buy more tickets')
+                                                    @lang('Donate to our community')
                                                 </a>
                                             </p>
                                         @endif

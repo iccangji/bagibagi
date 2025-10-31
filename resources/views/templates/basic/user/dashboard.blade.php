@@ -44,7 +44,7 @@
                                 <i class="fa-solid fa-ticket"></i>
                             </div>
                             <div class="dashboard-widget__content">
-                                <span class="dashboard-widget__text">@lang('Lottery Buy')</span>
+                                <span class="dashboard-widget__text">@lang('Ticket Buy')</span>
                                 <h4 class="dashboard-widget__number">{{ $totalPurchased }}</h4>
                             </div>
                         </a>

@@ -48,7 +48,7 @@
                         <a href="#buysection" class="cmn--btn mt-4">@lang('Join')</a>
 
                         <div class="mt-2 remaining-time">
-                            <span class="title"> @lang('Live Drawn:') </span>
+                            <span class="title"> @lang('Undian Berlangsung') </span>
                             <div class="countdown-item countdown" data-Date="{{ @$lottery->draw_date, 'd-m-Y H:i:s ' }}">
                                 <div class="remaining-time">
                                     <div class="remaining-time running">

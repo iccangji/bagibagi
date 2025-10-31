@@ -19,7 +19,8 @@
                         <ul class="social-list">
                             @foreach ($socialIcons as $social)
                                 <li class="social-list__item">
-                                    <a href="{{ @$social->data_values->url }}" class="social-list__link flex-center" target="_blank">
+                                    <a href="{{ @$social->data_values->url }}" class="social-list__link flex-center"
+                                        target="_blank">
                                         @php
                                             echo @$social->data_values->social_icon;
                                         @endphp
@@ -47,7 +48,8 @@
                         <ul class="footer-menu">
                             @foreach ($competitions->take(3) as $item)
                                 <li class="footer-menu__item">
-                                    <a href="{{ route('competiontype.lotteries', $item->slug) }}" class="footer-menu__link">{{ $item->name }}</a>
+                                    <a href="{{ route('competiontype.lotteries', $item->slug) }}"
+                                        class="footer-menu__link">{{ $item->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -57,7 +59,8 @@
                         <ul class="footer-menu">
                             @foreach ($policyPages as $policy)
                                 <li class="footer-menu__item">
-                                    <a href="{{ route('policy.pages', $policy->slug) }}" class="footer-menu__link">{{ __($policy->data_values->title) }}</a>
+                                    <a href="{{ route('policy.pages', $policy->slug) }}"
+                                        class="footer-menu__link">{{ __($policy->data_values->title) }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -68,10 +71,12 @@
         <div class="bottom-footer">
             <div class="bottom-footer__wrapper">
                 <p class="bottom-footer-text text-center">
-                    @lang('Copyright') &copy; @php echo date('Y') @endphp <a href="{{ route('home') }}" class="text--base">{{ __(gs('site_name')) }}</a> @lang('All Rights Reserved')
+                    @lang('Copyright') &copy; @php echo date('Y') @endphp <a href="{{ route('home') }}"
+                        class="text--base">{{ __(gs('site_name')) }}</a> @lang('All Rights Reserved')
                 </p>
                 <p class="bottom-footer-text text-center mt-2">
-                    Undian ini bukan judi ─ Sudah sesuai dengan hukum Islam. <br> <a href="{{ route('blog.details', 'hukum-pemberian-hadiah-gratis')}}">Klik di sini untuk informasi</a>
+                    Undian ini bukan judi ─ Sudah sesuai dengan hukum Islam. <br> <a
+                        href="{{ route('policy.pages', 'hukum-giveaway') }}">Klik di sini untuk informasi</a>
                 </p>
             </div>
         </div>

@@ -43,7 +43,7 @@ Route::controller('SiteController')->group(function () {
     Route::get('/', 'index')->name('home');
 
     Route::get('competion/{slug}', 'competionTypeLotteries')->name('competiontype.lotteries');
-    Route::get('competion/raffle/{id}/{slug}', 'lotteryDetails')->name('lottery.details');
+    Route::get('competion/undian/{id}/{slug}', 'lotteryDetails')->name('lottery.details');
 
     Route::post('raffle/book/any', 'lotteryBookAny')->name('lottery.book.any');
     Route::post('raffle/book/segmentwise', 'lotteryBookSegmentwise')->name('lottery.book.segmentwise');

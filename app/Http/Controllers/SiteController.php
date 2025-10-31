@@ -205,7 +205,7 @@ class SiteController extends Controller
     {
         $lottery    = Lottery::where('id', $id)->live()->active()->firstOrFail();
         $percentage = (($lottery->num_of_tickets - $lottery->num_of_available_tickets) / $lottery->num_of_tickets) * 100;
-        $pageTitle  = 'Raffle Details';
+        $pageTitle  = 'Undian';
 
         $instChooseTickets    = explode(',', $lottery->instant_choose_variation);
         $newInstChooseTickets = [];
